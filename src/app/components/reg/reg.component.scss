@@ -1,0 +1,139 @@
+@import '/src/styles/variables.scss';
+
+.form-container {
+  display: block;
+  width: 450px;
+  height: 275px;
+  margin: 0 auto;
+  background-color: #FFFFFF;
+  border: 2px solid $border !important;
+  border-radius: 10px;
+}
+
+.form-wrapper {
+  display: block;
+  margin: 40px 75px 95px;
+  align-items: center;
+}
+
+mat-icon {
+  display: block;
+  font-size: 18px;
+  padding: 0;
+  margin: 0;
+}
+
+input {
+  display: block;
+  color: $text-color;
+  margin: 1em 0;
+  padding-left: 6.5em;
+  height: 40px;
+  width: 200px;
+  border: 2px solid $border;
+  border-radius: 10px;
+  transition-duration: .4s;
+  transition-property: border;
+
+  // opacity: .8 !important;
+  &:focus-visible {
+    outline-color: $color-active !important;
+  }
+
+  &:focus {
+    border-color: $color-active;
+  }
+}
+
+input[type="password"] {
+  max-width: 160px;
+  padding-right: 44px;
+}
+
+label {
+  color: $placeholder;
+  margin-top: .75em;
+  margin-left: 1.25em;
+  position: absolute;
+}
+
+.submit {
+  display: block;
+  position: relative;
+  background: $btn-color;
+  color: #FFFFFF;
+  border: #22A4DC;
+  border-radius: 10px;
+  height: 40px;
+  width: 125px;
+  margin: -28px auto;
+  opacity: 1;
+  transition-duration: .1s;
+  transition-property: opacity;
+
+  &:hover {
+    opacity: .6;
+  }
+
+  &:disabled {
+    opacity: .6;
+  }
+
+  &:active {
+    opacity: 1;
+  }
+}
+
+.mat-icon-button {
+  margin-right: -16px;
+  position: relative;
+  max-width: 16px;
+  padding: 0;
+  left: 254px;
+  bottom: 46px;
+  border: none;
+  color: $placeholder;
+  // right: 10px;
+}
+
+.ng-invalid {
+  // border-color: red;
+}
+
+.ng-valid {
+  border-color: $color-active;
+}
+
+.ng-pristine {}
+
+.ng-dirty {
+  border-color: $border-dirty;
+}
+
+.ng-untouched {}
+
+input.ng-touched.ng-touched {
+  border-color: $color-active;
+}
+
+input.ng-touched.ng-invalid {
+  border-color: $color-invalid;
+}
+
+input.ng-touched.ng-valid {
+  border-color: $border-dirty;
+}
+
+.error {
+  font-size: 9px;
+  position: absolute;
+  margin: -10px 15px;
+  color: $color-invalid;
+}
+
+.active {
+  font-size: 9px;
+  position: absolute;
+  margin: -10px 15px;
+  color: $placeholder;
+}

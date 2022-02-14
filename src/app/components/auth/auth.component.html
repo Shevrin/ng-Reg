@@ -1,0 +1,37 @@
+<!-- <mat-form-field
+  #fieldRef
+  [adOutlineBorder]="fieldRef"
+  [outlineWidth]="3"
+  [outlineColor]="'green'"
+  [outlineRadius]="10"
+  appearance="outline"
+>
+  <input matInput placeholder="Name" />
+</mat-form-field> -->
+
+<div class="form-container">
+  <div class="form-wrapper">
+    <label for="Name">Имя</label>
+    <input type="text" name="Name" id="auth-name" />
+    <label for="Email">Email</label>
+    <input type="email" name="Email" id="auth-email" />
+    <div class="pass-field">
+      <label for="Password">Пароль</label>
+      <input
+        type="password"
+        name="Password"
+        [type]="hide ? 'password' : 'text'"
+      />
+      <button
+        class="mat-icon-button"
+        (click)="hide = !hide"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide"
+      >
+        <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+      </button>
+    </div>
+
+    <button class="submit">Регистрация</button>
+  </div>
+</div>

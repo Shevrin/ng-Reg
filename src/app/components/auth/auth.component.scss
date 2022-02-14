@@ -1,0 +1,71 @@
+$border: #E6ECF5;
+$text-color: #313643;
+$placeholder: #888EA7;
+$btn-color: #22A4DC;
+
+
+.form-container {
+  display: block;
+  width: 450px;
+  height: 275px;
+  margin: 0 auto;
+  background-color: #FFFFFF;
+  border: 2px solid $border;
+  border-radius: 10px;
+}
+
+.form-wrapper {
+  margin: 40px 75px 95px;
+  align-items: center;
+
+}
+
+input {
+  display: block;
+  color: $text-color;
+  margin: 1em;
+  padding-left: 6.5em;
+  height: 40px !important;
+  max-width: 300px;
+  border: 2px solid $border !important;
+  border-radius: 10px !important;
+  // opacity: .8 !important;
+}
+
+input[type="password"] {
+  max-width: 114px;
+  padding-right: 50px;
+}
+
+label {
+  color: $placeholder;
+  margin-top: .75em;
+  margin-left: 1.75em;
+  position: absolute;
+}
+
+.submit {
+  display: block;
+  position: relative;
+  background: $btn-color;
+  color: #FFFFFF;
+  border: #22A4DC;
+  border-radius: 10px;
+  height: 40px;
+  width: 125px;
+  margin: -28px auto;
+}
+
+
+.mat-icon-button {
+  // display: flex;
+  margin-right: -26px;
+  position: relative;
+  // z-index: 1;
+  left: 230px;
+  bottom: 49px;
+  border: none;
+  color: $placeholder;
+  right: 10px;
+  // position: absolute;
+}

@@ -1,0 +1,31 @@
+mat-tab-group {
+  display: block;
+  margin: 0 auto;
+  width: 500px;
+}
+
+mat-tab {
+  display: flex;
+  margin: 0 auto;
+  width: 300px;
+}
+
+.mat-tab-label-container {
+  position: absolute;
+}
+
+::ng-deep.mat-tab-labels {
+  display: flex;
+  position: relative;
+  justify-content: center;
+}
+
+::ng-deep.mat-ink-bar {
+  visibility: hidden !important;
+  // height: 0 !important;
+  // bottom: -2px !important;
+}
+
+::ng-deep.mat-tab-header {
+  border: none !important;
+}

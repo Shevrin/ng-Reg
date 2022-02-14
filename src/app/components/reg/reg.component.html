@@ -1,0 +1,53 @@
+<form class="form-container" [formGroup]="regForm">
+  <div class="form-wrapper">
+    <!-- <small class="active" *ngIf="isControlTouched('name')"> -->
+    <!-- Подсказка: Введите ваше имя
+    </small> -->
+    <small class="error" *ngIf="isControlInvalid('name')">
+      Имя должно состоять из 6 символов
+    </small>
+    <div>
+      <label for="Name">Имя</label>
+      <input
+        type="text"
+        name="Name"
+        id="reg-name"
+        formControlName="name"
+        markAsPending
+      />
+    </div>
+    <!-- <small class="active" *ngIf="isControlTouched('email')">
+      Подсказка: Введите ваш email
+    </small> -->
+    <small class="error" *ngIf="isControlInvalid('email')">
+      Введите корректный email
+    </small>
+    <label for="Email">Email</label>
+    <input type="email" name="Email" id="reg-email" formControlName="email" />
+    <!-- <small class="active" *ngIf="isControlTouched('email')">
+      Подсказка: Введите ваш пароль
+    </small> -->
+    <small class="error" *ngIf="isControlInvalid('password')">
+      Пароль должен состоять из 6 символов и заглавной буквы
+    </small>
+    <div class="pass-field">
+      <label for="Password">Пароль</label>
+      <input
+        type="password"
+        name="Password"
+        formControlName="password"
+        [type]="hide ? 'password' : 'text'"
+      />
+      <button
+        class="mat-icon-button"
+        (click)="hide = !hide"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide"
+      >
+        <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+      </button>
+    </div>
+    <button class="submit" (onSubmit)="onSubmit()">Регистрация</button>
+  </div>
+</form>
+
