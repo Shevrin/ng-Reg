@@ -1,13 +1,17 @@
 mat-tab-group {
   display: block;
-  margin: 0 auto;
+  margin: 15% auto;
   width: 500px;
 }
 
 mat-tab {
-  display: flex;
-  margin: 0 auto;
   width: 300px;
+}
+
+.home-wrapper {
+  display: flex;
+  height: 100%;
+  width: 100%;
 }
 
 .mat-tab-label-container {

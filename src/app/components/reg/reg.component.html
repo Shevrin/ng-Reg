@@ -1,20 +1,14 @@
-<form class="form-container" [formGroup]="regForm">
+<form class="form-container" (ngSubmit)="onSubmit()" [formGroup]="regForm">
   <div class="form-wrapper">
     <!-- <small class="active" *ngIf="isControlTouched('name')"> -->
     <!-- Подсказка: Введите ваше имя
     </small> -->
-    <small class="error" *ngIf="isControlInvalid('name')">
+    <small class="error" *ngIf="isControlInvalid('username')">
       Имя должно состоять из 6 символов
     </small>
     <div>
       <label for="Name">Имя</label>
-      <input
-        type="text"
-        name="Name"
-        id="reg-name"
-        formControlName="name"
-        markAsPending
-      />
+      <input type="text" name="Name" id="reg-name" formControlName="username" />
     </div>
     <!-- <small class="active" *ngIf="isControlTouched('email')">
       Подсказка: Введите ваш email
@@ -47,7 +41,14 @@
         <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
       </button>
     </div>
-    <button class="submit" (onSubmit)="onSubmit()">Регистрация</button>
+    <button class="btn-submit submit" [disabled]="regForm.invalid">
+      Регистрация
+    </button>
+    <!-- <button class="btn-submit"> -->
+    <!-- <mat-icon class="load-icon">autorenew</mat-icon> -->
+
+    <!-- <i class="fa-solid fa-rotate"></i> -->
+    <!-- </button> -->
   </div>
 </form>
-
+{{ isSubmitting$ | async }}

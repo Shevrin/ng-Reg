@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { select, Store } from '@ngrx/store';
 import { registerAction } from 'src/app/store/actions/reg.action';
+import { isSubmittingSelector } from 'src/app/store/selectors/selectors';
+import { IregRequest } from 'src/app/models/reg-request.interface';
 
 @Component({
   selector: 'app-reg',
@@ -9,26 +12,21 @@ import { registerAction } from 'src/app/store/actions/reg.action';
   styleUrls: ['./reg.component.scss'],
 })
 export class RegComponent implements OnInit {
-  regForm!: FormGroup;
   hide = true;
+  formValid = false;
+  regForm!: FormGroup;
+  isSubmitting$!: Observable<boolean>;
 
   constructor(private fb: FormBuilder, private store: Store) {}
 
-  getErrorMessage() {
-    // if (this.email.hasError('required')) {
-    //   return 'You must enter a value';
-    // }
-    // return this.email.hasError('email') ? 'Not a valid email' : '';
-  }
-  // <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
-
   ngOnInit(): void {
     this.initForm();
+    this.initValues();
   }
 
-  initForm() {
+  initForm(): void {
     this.regForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(6)]],
+      username: ['', [Validators.required, Validators.minLength(6)]],
       email: ['', [Validators.required, Validators.email]],
       password: [
         '',
@@ -44,30 +42,24 @@ export class RegComponent implements OnInit {
   isControlInvalid(controlName: string): boolean {
     const control = this.regForm.controls[controlName];
     const result = control.invalid && control.touched;
-
     return result;
   }
 
-  onSubmit() {
+  onSubmit(): void {
     const controls = this.regForm.controls;
-
     if (this.regForm.invalid) {
       Object.keys(controls).forEach((controlName) =>
         controls[controlName].markAsTouched()
       );
       return;
     }
-    /** TODO: Обработка данных формы */
-    console.log(this.regForm.value);
-    this.store.dispatch(registerAction(this.regForm.value));
+    const request: IregRequest = {
+      user: this.regForm.value,
+    };
+    this.store.dispatch(registerAction({ request }));
   }
 
-  // isControlTouched(controlName: string): boolean {
-  // const control = this.regForm.controls[controlName];
-  // const result = control.dirty;
-  // console.log(control.pristine);
-  // console.log(control.touched);
-
-  // return result;
-  // }
+  initValues(): void {
+    this.isSubmitting$ = this.store.pipe(select(isSubmittingSelector));
+  }
 }

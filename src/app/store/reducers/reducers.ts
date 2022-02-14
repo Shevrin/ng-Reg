@@ -10,6 +10,6 @@ export const authReducer = createReducer(
   initialState,
   on(registerAction, (state: IauthState) => ({
     ...state,
-    isSubmiting: true,
+    isSubmitting: true,
   }))
 );

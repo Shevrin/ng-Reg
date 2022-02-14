@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 
 import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AppComponent } from './app.component';
@@ -21,6 +22,7 @@ import { AccountComponent } from './components/account/account.component';
 import { EmptyComponent } from './components/empty/empty.component';
 import { environment } from 'src/environments/environment';
 import { authReducer } from './store/reducers/reducers';
+import { RegisterEffect } from './store/effects/register.effect';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,7 @@ import { authReducer } from './store/reducers/reducers';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     StoreModule.forRoot({ auth: authReducer }),
+    EffectsModule.forRoot([RegisterEffect]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
