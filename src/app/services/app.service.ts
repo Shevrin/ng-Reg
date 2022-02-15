@@ -23,7 +23,7 @@ export class AppService {
   }
 
   login(user: IauthRequest): Observable<IcurrentUser> {
-    const url = environment.apiUrl + '/users';
+    const url = environment.apiUrl + '/users/login';
     return this.http.post<IauthResponse>(url, user).pipe(map(this.detUser));
   }
 
