@@ -61,7 +61,7 @@ export class RegComponent implements OnInit {
 
   initValues(): void {
     this.isSubmitting$ = this.store.pipe(
-      throttleTime(1000),
+      throttleTime(2000),
       select(isSubmittingSelector)
     );
   }
