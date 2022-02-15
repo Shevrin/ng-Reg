@@ -1,8 +1,5 @@
 <form class="form-container" (ngSubmit)="onSubmit()" [formGroup]="regForm">
   <div class="form-wrapper">
-    <!-- <small class="active" *ngIf="isControlTouched('name')"> -->
-    <!-- Подсказка: Введите ваше имя
-    </small> -->
     <small class="error" *ngIf="isControlInvalid('username')">
       Имя должно состоять из 6 символов
     </small>
@@ -10,17 +7,13 @@
       <label for="Name">Имя</label>
       <input type="text" name="Name" id="reg-name" formControlName="username" />
     </div>
-    <!-- <small class="active" *ngIf="isControlTouched('email')">
-      Подсказка: Введите ваш email
-    </small> -->
+
     <small class="error" *ngIf="isControlInvalid('email')">
       Введите корректный email
     </small>
     <label for="Email">Email</label>
     <input type="email" name="Email" id="reg-email" formControlName="email" />
-    <!-- <small class="active" *ngIf="isControlTouched('email')">
-      Подсказка: Введите ваш пароль
-    </small> -->
+
     <small class="error" *ngIf="isControlInvalid('password')">
       Пароль должен состоять из 6 символов и заглавной буквы
     </small>
@@ -41,14 +34,17 @@
         <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
       </button>
     </div>
-    <button class="btn-submit submit" [disabled]="regForm.invalid">
-      Регистрация
+    <button
+      class="btn-submit submit"
+      [disabled]="regForm.invalid"
+      [style.width]="!(isSubmitting$ | async) ? '125px' : '40px'"
+    >
+      <span *ngIf="!(isSubmitting$ | async)">Регистрация</span>
+      <fa-icon
+        [icon]="['fas', 'arrows-rotate']"
+        [spin]="true"
+        *ngIf="isSubmitting$ | async"
+      ></fa-icon>
     </button>
-    <!-- <button class="btn-submit"> -->
-    <!-- <mat-icon class="load-icon">autorenew</mat-icon> -->
-
-    <!-- <i class="fa-solid fa-rotate"></i> -->
-    <!-- </button> -->
   </div>
 </form>
-{{ isSubmitting$ | async }}

@@ -1,25 +1,20 @@
-<!-- <mat-form-field
-  #fieldRef
-  [adOutlineBorder]="fieldRef"
-  [outlineWidth]="3"
-  [outlineColor]="'green'"
-  [outlineRadius]="10"
-  appearance="outline"
->
-  <input matInput placeholder="Name" />
-</mat-form-field> -->
-
-<div class="form-container">
+<form class="form-container" (ngSubmit)="onSubmit()" [formGroup]="regForm">
   <div class="form-wrapper">
-    <label for="Name">Имя</label>
-    <input type="text" name="Name" id="auth-name" />
+    <small class="error" *ngIf="isControlInvalid('email')">
+      Введите корректный email
+    </small>
     <label for="Email">Email</label>
-    <input type="email" name="Email" id="auth-email" />
+    <input type="email" name="Email" id="reg-email" formControlName="email" />
+
+    <small class="error" *ngIf="isControlInvalid('password')">
+      Введите корректный пароль
+    </small>
     <div class="pass-field">
       <label for="Password">Пароль</label>
       <input
         type="password"
         name="Password"
+        formControlName="password"
         [type]="hide ? 'password' : 'text'"
       />
       <button
@@ -31,7 +26,17 @@
         <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
       </button>
     </div>
-
-    <button class="submit">Регистрация</button>
+    <button
+      class="btn-submit submit"
+      [disabled]="regForm.invalid"
+      [style.width]="!(isSubmitting$ | async) ? '125px' : '40px'"
+    >
+      <span *ngIf="!(isSubmitting$ | async)">Войти</span>
+      <fa-icon
+        [icon]="['fas', 'arrows-rotate']"
+        [spin]="true"
+        *ngIf="isSubmitting$ | async"
+      ></fa-icon>
+    </button>
   </div>
-</div>
+</form>

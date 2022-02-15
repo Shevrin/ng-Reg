@@ -2,6 +2,7 @@ import { createAction, props } from '@ngrx/store';
 import { IregRequest } from 'src/app/models/reg-request.interface';
 import { IcurrentUser } from 'src/app/models/current-user.interface';
 import { ActionTypes } from './actionTypes';
+import { IbackendErrors } from 'src/app/models/backend-errors.interface';
 
 export const registerAction = createAction(
   ActionTypes.REGISTER,
@@ -11,4 +12,7 @@ export const registerSuccessAction = createAction(
   ActionTypes.REGISTER_SUCCESS,
   props<{ currentUser: IcurrentUser }>()
 );
-export const registerFailureAction = createAction(ActionTypes.REGISTER_FAILURE);
+export const registerFailureAction = createAction(
+  ActionTypes.REGISTER_FAILURE,
+  props<{ errors: IbackendErrors }>()
+);

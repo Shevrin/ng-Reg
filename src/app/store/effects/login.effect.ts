@@ -6,28 +6,24 @@ import { catchError, map, of, switchMap, tap } from 'rxjs';
 import { IcurrentUser } from 'src/app/models/current-user.interface';
 import { AppService } from 'src/app/services/app.service';
 import { StorageService } from 'src/app/services/storage.service';
-import {
-  registerAction,
-  registerFailureAction,
-  registerSuccessAction,
-} from '../actions/reg.action';
+import { loginAction, loginFailureAction, loginSuccessAction } from '../actions/login.action';
 
 @Injectable({
   providedIn: 'root',
 })
-export class RegisterEffect {
-  register$ = createEffect(() =>
+export class LoginEffect {
+  login$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(registerAction),
+      ofType(loginAction),
       switchMap(({ request }) => {
-        return this.appService.register(request).pipe(
+        return this.appService.login(request).pipe(
           map((currentUser: IcurrentUser) => {
             this.storageService.set('successToken', currentUser.token);
-            return registerSuccessAction({ currentUser });
+            return loginSuccessAction({ currentUser });
           }),
           catchError((errorResponce: HttpErrorResponse) => {
             return of(
-              registerFailureAction({ errors: errorResponce.error.errors })
+              loginFailureAction({ errors: errorResponce.error.errors })
             );
           })
         );
@@ -38,7 +34,7 @@ export class RegisterEffect {
   redirectAfterSubmit = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(registerSuccessAction),
+        ofType(loginSuccessAction),
         tap(() => {
           setTimeout(() => this.router.navigateByUrl('/account'), 2000);
         })

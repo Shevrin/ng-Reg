@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, throttleTime } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 import { registerAction } from 'src/app/store/actions/reg.action';
 import { isSubmittingSelector } from 'src/app/store/selectors/selectors';
@@ -60,6 +60,9 @@ export class RegComponent implements OnInit {
   }
 
   initValues(): void {
-    this.isSubmitting$ = this.store.pipe(select(isSubmittingSelector));
+    this.isSubmitting$ = this.store.pipe(
+      throttleTime(1000),
+      select(isSubmittingSelector)
+    );
   }
 }

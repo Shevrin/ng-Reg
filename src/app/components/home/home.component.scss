@@ -1,17 +1,36 @@
+* {
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
+}
+
 mat-tab-group {
   display: block;
   margin: 15% auto;
   width: 500px;
+  height: 100% !important;
+}
+
+::ng-deep.mat-tab-body-wrapper {
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
 }
 
 mat-tab {
   width: 300px;
 }
 
+::ng-deep.mat-tab-label-content {
+  font-size: 21px;
+}
+
 .home-wrapper {
   display: flex;
   height: 100%;
   width: 100%;
+}
+
+.mat-tab-label-wrapper {
+  height: 100%;
 }
 
 .mat-tab-label-container {

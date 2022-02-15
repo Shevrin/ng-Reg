@@ -1,8 +1,4 @@
-$border: #E6ECF5;
-$text-color: #313643;
-$placeholder: #888EA7;
-$btn-color: #22A4DC;
-
+@import '/src/styles/variables.scss';
 
 .form-container {
   display: block;
@@ -10,41 +6,57 @@ $btn-color: #22A4DC;
   height: 275px;
   margin: 0 auto;
   background-color: #FFFFFF;
-  border: 2px solid $border;
+  border: 2px solid $border !important;
   border-radius: 10px;
 }
 
 .form-wrapper {
+  display: block;
   margin: 40px 75px 95px;
   align-items: center;
+}
 
+mat-icon {
+  display: inline-block;
+  font-size: 18px;
+  padding: 0;
+  margin: 0;
 }
 
 input {
   display: block;
   color: $text-color;
-  margin: 1em;
+  margin: 1em 0;
   padding-left: 6.5em;
-  height: 40px !important;
-  max-width: 300px;
-  border: 2px solid $border !important;
-  border-radius: 10px !important;
-  // opacity: .8 !important;
+  height: 40px;
+  width: 200px;
+  border: 2px solid $border;
+  border-radius: 10px;
+  transition-duration: .4s;
+  transition-property: border;
+
+  &:focus-visible {
+    outline-color: $color-active !important;
+  }
+
+  &:focus {
+    border-color: $color-active;
+  }
 }
 
 input[type="password"] {
-  max-width: 114px;
-  padding-right: 50px;
+  max-width: 158px;
+  padding-right: 44px;
 }
 
 label {
   color: $placeholder;
   margin-top: .75em;
-  margin-left: 1.75em;
+  margin-left: 1.25em;
   position: absolute;
 }
 
-.submit {
+.btn-submit {
   display: block;
   position: relative;
   background: $btn-color;
@@ -52,20 +64,66 @@ label {
   border: #22A4DC;
   border-radius: 10px;
   height: 40px;
-  width: 125px;
   margin: -28px auto;
+  opacity: 1;
+  transition-duration: .1s;
+  transition-property: opacity;
+
+  &:hover {
+    opacity: .6;
+  }
+
+  &:disabled {
+    opacity: .6;
+  }
+
+  &:active {
+    opacity: 1;
+  }
 }
 
-
 .mat-icon-button {
-  // display: flex;
-  margin-right: -26px;
+  display: inline-block;
+  margin-right: -16px;
   position: relative;
-  // z-index: 1;
-  left: 230px;
-  bottom: 49px;
+  max-width: 16px;
+  padding: 0;
+  left: 254px;
+  bottom: 46px;
   border: none;
   color: $placeholder;
-  right: 10px;
-  // position: absolute;
+}
+
+.ng-valid {
+  border-color: $color-active;
+}
+
+.ng-dirty {
+  border-color: $border-dirty;
+}
+
+input.ng-touched.ng-touched {
+  border-color: $color-active;
+}
+
+input.ng-touched.ng-invalid {
+  border-color: $color-invalid;
+}
+
+input.ng-touched.ng-valid {
+  border-color: $border-dirty;
+}
+
+.error {
+  font-size: 9px;
+  position: absolute;
+  margin: -10px 15px;
+  color: $color-invalid;
+}
+
+.active {
+  font-size: 9px;
+  position: absolute;
+  margin: -10px 15px;
+  color: $placeholder;
 }

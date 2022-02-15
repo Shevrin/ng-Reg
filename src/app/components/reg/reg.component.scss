@@ -17,7 +17,7 @@
 }
 
 mat-icon {
-  display: block;
+  display: inline-block;
   font-size: 18px;
   padding: 0;
   margin: 0;
@@ -35,7 +35,6 @@ input {
   transition-duration: .4s;
   transition-property: border;
 
-  // opacity: .8 !important;
   &:focus-visible {
     outline-color: $color-active !important;
   }
@@ -46,7 +45,7 @@ input {
 }
 
 input[type="password"] {
-  max-width: 160px;
+  max-width: 158px;
   padding-right: 44px;
 }
 
@@ -83,35 +82,8 @@ label {
   }
 }
 
-.submit {
-  width: 125px;
-}
-
-.loading {
-  margin: -40px auto;
-  width: 40px;
-}
-
-.load-icon {
-  margin: 0 auto;
-  padding: 0;
-  align-items: center;
-  transition: transform .5s;
-  transform-origin: 25px 0px;
-  animation: rotate 1.4s infinite ease
-}
-
-@keyframes rotate {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 .mat-icon-button {
+  display: inline-block;
   margin-right: -16px;
   position: relative;
   max-width: 16px;
@@ -122,21 +94,13 @@ label {
   color: $placeholder;
 }
 
-.ng-invalid {
-  // border-color: red;
-}
-
 .ng-valid {
   border-color: $color-active;
 }
 
-.ng-pristine {}
-
 .ng-dirty {
   border-color: $border-dirty;
 }
-
-.ng-untouched {}
 
 input.ng-touched.ng-touched {
   border-color: $color-active;
