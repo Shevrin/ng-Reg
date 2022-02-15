@@ -28,7 +28,7 @@ export class AppService {
   }
 
   getCurrentUser(): Observable<IcurrentUser> {
-    const url = environment.apiUrl + '/users';
+    const url = environment.apiUrl + '/user';
     return this.http.get<IauthResponse>(url).pipe(map(this.detUser));
   }
 }
