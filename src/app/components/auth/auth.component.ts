@@ -59,9 +59,6 @@ export class AuthComponent implements OnInit {
   }
 
   initValues(): void {
-    this.isSubmitting$ = this.store.pipe(
-      throttleTime(2000),
-      select(isSubmittingSelector)
-    );
+    this.isSubmitting$ = this.store.pipe(select(isSubmittingSelector));
   }
 }

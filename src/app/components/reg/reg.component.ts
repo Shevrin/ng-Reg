@@ -1,10 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Observable, throttleTime } from 'rxjs';
+import { map, Observable, throttleTime } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 import { registerAction } from 'src/app/store/actions/reg.action';
-import { isSubmittingSelector } from 'src/app/store/selectors/selectors';
+import {
+  isLoggingInSelector,
+  isSubmittingSelector,
+  validationSelector,
+} from 'src/app/store/selectors/selectors';
 import { IregRequest } from 'src/app/models/reg-request.interface';
+import { IbackendErrors } from 'src/app/models/backend-errors.interface';
 
 @Component({
   selector: 'app-reg',
@@ -16,6 +21,11 @@ export class RegComponent implements OnInit {
   formValid = false;
   regForm!: FormGroup;
   isSubmitting$!: Observable<boolean>;
+  validatinServer$!: Observable<IbackendErrors | any>;
+  isValidServer!: false;
+  validName!: string | null;
+  validEmail = '';
+  isLoggingIn$!: Observable<boolean | null>;
 
   constructor(private fb: FormBuilder, private store: Store) {}
 
@@ -33,7 +43,7 @@ export class RegComponent implements OnInit {
         [
           Validators.required,
           Validators.minLength(6),
-          Validators.pattern(/[A-Z]+[^\s]*/),
+          Validators.pattern(/[A-ZА-Яа-я]+[^\s]*/),
         ],
       ],
     });
@@ -60,9 +70,25 @@ export class RegComponent implements OnInit {
   }
 
   initValues(): void {
-    this.isSubmitting$ = this.store.pipe(
-      throttleTime(2000),
-      select(isSubmittingSelector)
+    this.isSubmitting$ = this.store.pipe(select(isSubmittingSelector));
+    this.validatinServer$ = this.store.pipe(
+      select(validationSelector),
+      map((validationSelector) => {
+        console.log('validationSelector', Boolean(validationSelector));
+        if (validationSelector) {
+          this.validName = validationSelector['username'].reduce(
+            (result, current) => result + current
+          );
+          this.validEmail = validationSelector['email'].reduce(
+            (result, current) => result + current
+          );
+        }
+        console.log('validName', this.validName);
+      })
     );
+    this.validatinServer$.subscribe((data) =>
+      console.log('this.validatinServer$.subscribe', data)
+    );
+    this.isLoggingIn$ = this.store.pipe(select(isLoggingInSelector));
   }
 }

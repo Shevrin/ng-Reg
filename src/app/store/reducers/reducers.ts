@@ -20,7 +20,7 @@ const initialState: IauthState = {
   isSubmitting: false,
   isLoading: false,
   currentUser: null,
-  isLoggingIn: null,
+  isLoggingIn: true,
   validationErrors: null,
 };
 
@@ -48,6 +48,7 @@ export const authReducer = createReducer(
     (state, action): IauthState => ({
       ...state,
       isSubmitting: false,
+      isLoggingIn: false,
       validationErrors: action.errors,
     })
   ),
@@ -73,6 +74,7 @@ export const authReducer = createReducer(
     (state, action): IauthState => ({
       ...state,
       isSubmitting: false,
+      isLoggingIn: false,
       validationErrors: action.errors,
     })
   ),
@@ -97,7 +99,7 @@ export const authReducer = createReducer(
     (state): IauthState => ({
       ...state,
       isLoading: false,
-      isLoggingIn: false,
+      isLoggingIn: true,
       currentUser: null,
     })
   )

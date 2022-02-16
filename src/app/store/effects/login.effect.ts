@@ -36,7 +36,7 @@ export class LoginEffect {
       this.actions$.pipe(
         ofType(loginSuccessAction),
         tap(() => {
-          setTimeout(() => this.router.navigateByUrl('/account'), 2000);
+           this.router.navigateByUrl('/account');
         })
       ),
     { dispatch: false }

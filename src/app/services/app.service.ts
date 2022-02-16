@@ -13,22 +13,24 @@ import { IregRequest } from '../models/reg-request.interface';
 export class AppService {
   constructor(private http: HttpClient) {}
 
-  detUser(response: IauthResponse): IcurrentUser {
+  getUser(response: IauthResponse): IcurrentUser {
+    console.log('get response', response);
+
     return response.user;
   }
 
   register(user: IregRequest): Observable<IcurrentUser> {
     const url = environment.apiUrl + '/users';
-    return this.http.post<IauthResponse>(url, user).pipe(map(this.detUser));
+    return this.http.post<IauthResponse>(url, user).pipe(map(this.getUser));
   }
 
   login(user: IauthRequest): Observable<IcurrentUser> {
     const url = environment.apiUrl + '/users/login';
-    return this.http.post<IauthResponse>(url, user).pipe(map(this.detUser));
+    return this.http.post<IauthResponse>(url, user).pipe(map(this.getUser));
   }
 
   getCurrentUser(): Observable<IcurrentUser> {
     const url = environment.apiUrl + '/user';
-    return this.http.get<IauthResponse>(url).pipe(map(this.detUser));
+    return this.http.get<IauthResponse>(url).pipe(map(this.getUser));
   }
 }

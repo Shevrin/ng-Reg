@@ -3,6 +3,9 @@
     <small class="error" *ngIf="isControlInvalid('username')">
       Имя должно состоять из 6 символов
     </small>
+    <small class="error" *ngIf="!(isLoggingIn$ | async)">
+      Ошибка сервера: {{ validName }}
+    </small>
     <div>
       <label for="Name">Имя</label>
       <input type="text" name="Name" id="reg-name" formControlName="username" />
@@ -10,6 +13,9 @@
 
     <small class="error" *ngIf="isControlInvalid('email')">
       Введите корректный email
+    </small>
+    <small class="error" *ngIf="!(isLoggingIn$ | async)">
+      Ошибка сервера: {{ validEmail }}
     </small>
     <label for="Email">Email</label>
     <input type="email" name="Email" id="reg-email" formControlName="email" />
@@ -36,7 +42,7 @@
     </div>
     <button
       class="btn-submit submit"
-      [disabled]="regForm.invalid"
+      [disabled]="regForm.invalid || !(isLoggingIn$ | async)"
       [style.width]="!(isSubmitting$ | async) ? '125px' : '40px'"
     >
       <span *ngIf="!(isSubmitting$ | async)">Регистрация</span>

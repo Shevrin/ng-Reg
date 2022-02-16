@@ -19,9 +19,12 @@ export class Interceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     const token = this.storageService.get('successToken');
+
     req = req.clone({
       setHeaders: {
-        Authorisation: token ? `Token ${token}` : '',
+        Authorisation: token ? `Token  ${token}` : '',
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
       },
     });
     return next.handle(req);

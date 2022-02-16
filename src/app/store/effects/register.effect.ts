@@ -40,7 +40,7 @@ export class RegisterEffect {
       this.actions$.pipe(
         ofType(registerSuccessAction),
         tap(() => {
-          setTimeout(() => this.router.navigateByUrl('/account'), 2000);
+          this.router.navigateByUrl('/account');
         })
       ),
     { dispatch: false }
