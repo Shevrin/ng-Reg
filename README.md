@@ -6,7 +6,7 @@ NgRx 13.0.2.
 
 ## Development server
 
-Запуск `ng serve -о` или `npm start`. Локальный хост `http://localhost:4200/`. 
+Запуск `ng serve -о` или `npm start`. Локальный хост по умолчанию `http://localhost:4200/`. 
 Установка зависимостей `npm install`.
 
 ## Доп. библиотеки
