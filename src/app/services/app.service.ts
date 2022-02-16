@@ -14,8 +14,6 @@ export class AppService {
   constructor(private http: HttpClient) {}
 
   getUser(response: IauthResponse): IcurrentUser {
-    console.log('get response', response);
-
     return response.user;
   }
 

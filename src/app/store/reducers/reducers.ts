@@ -72,5 +72,5 @@ export const authReducer = createReducer(
       isLoggingIn: false,
       validationErrors: action.errors,
     })
-  ),
+  )
 );

@@ -127,3 +127,11 @@ input.ng-touched.ng-valid {
   margin: -10px 15px;
   color: $placeholder;
 }
+
+.cdk-mouse-focused {
+  opacity: 1;
+}
+
+.cdk-focused {
+  opacity: 1;
+}

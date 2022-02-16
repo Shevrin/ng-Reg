@@ -61,10 +61,7 @@ import { StorageService } from './services/storage.service';
     MatTableModule,
     FontAwesomeModule,
   ],
-  providers: [
-    StorageService,
-
-  ],
+  providers: [StorageService],
   bootstrap: [AppComponent],
 })
 export class AppModule {
