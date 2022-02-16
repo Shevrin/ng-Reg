@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -31,9 +31,7 @@ import { RegisterEffect } from './store/effects/register.effect';
 import { LoginEffect } from './store/effects/login.effect';
 
 import { environment } from 'src/environments/environment';
-import { GetCurrentUserEffect } from './store/effects/getCurrentUser.effect';
 import { StorageService } from './services/storage.service';
-import { Interceptor } from './services/interceptor.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,7 +48,7 @@ import { Interceptor } from './services/interceptor.service';
     HttpClientModule,
     ReactiveFormsModule,
     StoreModule.forRoot({ auth: authReducer }),
-    EffectsModule.forRoot([RegisterEffect, LoginEffect, GetCurrentUserEffect]),
+    EffectsModule.forRoot([RegisterEffect, LoginEffect]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
@@ -65,11 +63,7 @@ import { Interceptor } from './services/interceptor.service';
   ],
   providers: [
     StorageService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: Interceptor,
-      multi: true,
-    },
+
   ],
   bootstrap: [AppComponent],
 })
