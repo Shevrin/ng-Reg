@@ -1,10 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Observable, throttleTime } from 'rxjs';
+import { map, Observable, throttleTime } from 'rxjs';
 import { select, Store } from '@ngrx/store';
-import { isSubmittingSelector } from 'src/app/store/selectors/selectors';
+import {
+  isLoggingInSelector,
+  isSubmittingSelector,
+  validationSelector,
+} from 'src/app/store/selectors/selectors';
 import { IauthRequest } from 'src/app/models/auth-request.interface';
 import { loginAction } from 'src/app/store/actions/login.action';
+import { IbackendErrors } from 'src/app/models/backend-errors.interface';
 
 @Component({
   selector: 'app-auth',
@@ -16,6 +21,9 @@ export class AuthComponent implements OnInit {
   formValid = false;
   regForm!: FormGroup;
   isSubmitting$!: Observable<boolean>;
+  validatinServer$!: Observable<IbackendErrors | any>;
+  validEmail!: string | null;
+  isLoggingIn$!: Observable<boolean | null>;
 
   constructor(private fb: FormBuilder, private store: Store) {}
 
@@ -32,7 +40,7 @@ export class AuthComponent implements OnInit {
         [
           Validators.required,
           Validators.minLength(6),
-          Validators.pattern(/[A-Z]+[^\s]*/),
+          Validators.pattern(/[A-ZА-Яа-я]+[^\s]*/),
         ],
       ],
     });
@@ -60,5 +68,16 @@ export class AuthComponent implements OnInit {
 
   initValues(): void {
     this.isSubmitting$ = this.store.pipe(select(isSubmittingSelector));
+    this.validatinServer$ = this.store.pipe(
+      select(validationSelector),
+      map((validationSelector) => {
+        if (validationSelector) {
+          this.validEmail = validationSelector['email or password'].reduce(
+            (result, current) => result + current
+          );
+        }
+      })
+    );
+    this.isLoggingIn$ = this.store.pipe(select(isLoggingInSelector));
   }
 }

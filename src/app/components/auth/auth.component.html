@@ -3,11 +3,16 @@
     <small class="error" *ngIf="isControlInvalid('email')">
       Введите корректный email
     </small>
+    <small class="error" *ngIf="!(isLoggingIn$ | async)">
+      Неверный логин или пароль
+    </small>
     <label for="Email">Email</label>
     <input type="email" name="Email" id="reg-email" formControlName="email" />
-
     <small class="error" *ngIf="isControlInvalid('password')">
       Введите корректный пароль
+    </small>
+    <small class="error" *ngIf="!(isLoggingIn$ | async)">
+      Неверный логин или пароль
     </small>
     <div class="pass-field">
       <label for="Password">Пароль</label>

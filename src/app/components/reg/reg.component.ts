@@ -22,9 +22,8 @@ export class RegComponent implements OnInit {
   regForm!: FormGroup;
   isSubmitting$!: Observable<boolean>;
   validatinServer$!: Observable<IbackendErrors | any>;
-  isValidServer!: false;
   validName!: string | null;
-  validEmail = '';
+  validEmail!: string | null;
   isLoggingIn$!: Observable<boolean | null>;
 
   constructor(private fb: FormBuilder, private store: Store) {}
@@ -74,7 +73,6 @@ export class RegComponent implements OnInit {
     this.validatinServer$ = this.store.pipe(
       select(validationSelector),
       map((validationSelector) => {
-        console.log('validationSelector', Boolean(validationSelector));
         if (validationSelector) {
           this.validName = validationSelector['username'].reduce(
             (result, current) => result + current
@@ -83,11 +81,7 @@ export class RegComponent implements OnInit {
             (result, current) => result + current
           );
         }
-        console.log('validName', this.validName);
       })
-    );
-    this.validatinServer$.subscribe((data) =>
-      console.log('this.validatinServer$.subscribe', data)
     );
     this.isLoggingIn$ = this.store.pipe(select(isLoggingInSelector));
   }
